@@ -1,0 +1,95 @@
+{
+  "name": "custom-sounds",
+  "displayName": "Custom Sounds",
+  "description": "Play custom audio for terminal errors.",
+  "version": "1.0.0",
+  "publisher": "DipishBisht",
+  "engines": {
+    "vscode": "^1.87.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "sound",
+    "audio",
+    "notifications",
+    "productivity",
+    "terminal"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "customSounds.toggle",
+        "title": "Custom Sounds: Toggle On/Off"
+      },
+      {
+        "command": "customSounds.setup",
+        "title": "Custom Sounds: Setup Sounds"
+      },
+      {
+        "command": "customSounds.showLog",
+        "title": "Custom Sounds: Show Log"
+      }
+    ],
+    "configuration": {
+      "title": "Custom Sounds",
+      "properties": {
+        "customSounds.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable all custom sounds."
+        },
+        "customSounds.cooldown": {
+          "type": "number",
+          "default": 3000,
+          "description": "Cooldown in milliseconds between repeated sounds."
+        },
+        "customSounds.debug": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable verbose debug logging."
+        },
+        "customSounds.terminalErrorSound": {
+          "type": "string",
+          "default": "",
+          "description": "Absolute path to sound played when a terminal command fails (non-zero exit code)."
+        },
+        "customSounds.enableSound": {
+          "type": "string",
+          "default": "",
+          "description": "Absolute path to sound played when extension is toggled on."
+        },
+        "customSounds.disableSound": {
+          "type": "string",
+          "default": "",
+          "description": "Absolute path to sound played when extension is toggled off."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "esbuild src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --minify",
+    "build:dev": "esbuild src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --sourcemap",
+    "watch": "esbuild src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --sourcemap --watch",
+    "compile": "tsc --noEmit",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.87.0",
+    "@typescript-eslint/eslint-plugin": "^8.56.1",
+    "@typescript-eslint/parser": "^8.56.1",
+    "@vscode/vsce": "^2.24.0",
+    "esbuild": "^0.20.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.1"
+  }
+}
