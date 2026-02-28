@@ -2,15 +2,18 @@
 
 A flexible, pattern-based developer sound engine for VS Code.
 
+
+## Quick Start
+
+1. Install the extension
+2. Press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (Mac)
+3. Type: **"Custom Sounds: Setup Sounds"**
+
+
 ## Features
 
-- 🎯 **Task events** — success/fail for any task, plus build-specific and test-specific sounds
-- 🔴 **Diagnostics** — sound when errors appear or are cleared in the Problems panel
-- 💾 **Save events** — different sound for clean saves vs saves with errors
-- 🖥️ **Terminal patterns** — regex or substring matching against terminal output
-- 🎲 **Random from folder** — pick a random sound from a directory
-- ⏱️ **Per-event cooldowns** — no sound spam, configurable per trigger
-- 🔇 **Toggle command** — quickly mute all sounds
+- 🎯 **Custom sound** — Add your favorite sounds in terminal error 
+- 🔇 **Toggle command** — quickly mute sounds
 
 ## Platform Support
 
@@ -20,47 +23,25 @@ A flexible, pattern-based developer sound engine for VS Code.
 | Windows | PowerShell `System.Windows.Media`       |
 | Linux   | `paplay` → `aplay` → `mpg123` (auto)   |
 
-## Quick Start
-
-1. Install the extension
-2. Open `settings.json` and add your sound paths
-3. See `example-settings.json` for a full configuration example
 
 ## Commands
 
 | Command                              | Description                   |
 |--------------------------------------|-------------------------------|
 | `Custom Sounds: Toggle On/Off`       | Enable or disable all sounds  |
-| `Custom Sounds: Test a Sound File`   | Play any file path you enter  |
+| `Custom Sounds: Setup Sounds`        | Setup any sound as error sound|
 | `Custom Sounds: Show Log`            | Open the debug output channel |
-| `Custom Sounds: Reset All Cooldowns` | Immediately reset all timers  |
 
-## Pattern Triggers
-
-Patterns can be plain substrings (case-insensitive) or regex strings using
-`/pattern/flags` syntax:
-
-```json
-"customSounds.triggers": [
-  { "pattern": "Compiled successfully", "sound": "/path/victory.mp3" },
-  { "pattern": "/\\d+ tests? failed/i", "sound": "/path/fail.mp3" }
-]
-```
-
-Each trigger can have its own `cooldown` in milliseconds to override the global setting.
 
 ## Architecture
 
 ```
 src/
 ├── extension.ts          # Activation, command registration, wiring
-├── configManager.ts      # Typed config access (getConfig())
-├── soundPlayer.ts        # Cross-platform audio playback
-├── cooldownManager.ts    # Per-key debounce logic
-├── taskListener.ts       # onDidEndTaskProcess handler
-├── diagnosticsListener.ts# onDidChangeDiagnostics handler
-├── saveListener.ts       # onDidSaveTextDocument handler
-├── terminalListener.ts   # onDidWriteTerminalData handler
+├── config-manager.ts      # Typed config access (getConfig())
+├── sound-player.ts        # Cross-platform audio playback
+├── cooldown-manager.ts    # Per-key debounce logic
+├── terminal-listener.ts   # onDidWriteTerminalData handler
 └── logger.ts             # Output channel logger
 ```
 
