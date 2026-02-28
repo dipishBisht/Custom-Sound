@@ -12,8 +12,8 @@ A flexible, pattern-based developer sound engine for VS Code.
 
 ## Features
 
-- 🎯 **Custom sound** — Add your favorite sounds in terminal error 
-- 🔇 **Toggle command** — quickly mute sounds
+- **Custom sound** — Add your favorite sounds in terminal error 
+- **Toggle command** — quickly mute sounds
 
 ## Platform Support
 
